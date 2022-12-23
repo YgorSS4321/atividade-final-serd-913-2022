@@ -3,8 +3,66 @@
   *configurações basicas para VMs (configuração do netplan, openvpn3, ssh para as VMs remotas): <a href="" >link para as configurações padrão<a/>
   
 ```bash
-sudo apt update
+  sudo apt update
 ```
 ```bash
   sudo apt install samba
 ```
+ 
+```bash
+  whereis samba
+```
+```bash
+  sudo systemctl status smbd.service
+```
+ 
+```bash
+  netstat -an | grep LISTEN
+```
+ 
+```bash
+  sudo nano /etc/samba/smb.conf
+```
+ Adicionando ao arquivo de configuração ```/etc/smb.conf```, em ```interfaces``` de global, os nomes dos adaptadores de rede, que no nosso caso será ```ens160 ens192``` 
+ E Adicionando no final do arquivo as seguintes linhas: 
+ ```
+[homes]
+   comment = Home Directories
+   browseable = yes
+   read only = no
+   create mask = 0700
+   directory mask = 0700
+   valid users = %S
+[public]
+   comment = public anonymous access
+   path = /samba/public
+   browsable =yes
+   create mask = 0660
+   directory mask = 0771
+   writable = yes
+   guest ok = yes
+   guest only = yes
+   force user = nobody
+   force create mode = 0777
+   force directory mode = 0777
+```
+ Para então reestartar o serviço samba com:
+ ```bash
+   sudo systemctl restart smbd
+ ```
+ 
+ Para acessar os arquivos do servidor samba será necessário que um usuário do servidor samba esteja cadastrado no samba e esteja também cadastrado no grupo o qual o servidor samba é especificado em ```valid user = sambashare```, isso é feito da seguinte forma:
+ 
+ ```bash 
+   sudo smbpasswd -a aluno
+ ```
+ em que ```aluno``` é um usuário do servidor ubuntu-server que hospeda o ```samba```
+ 
+ ```
+   sudo usermod -aG sambashare aluno
+ ```
+ adiciona o ```aluno``` no grupo ```sambashare``` (o grupo especificado em ```valid users = sambashare```)
+ 
+ 
+ 
+ 
