@@ -3,25 +3,25 @@
   *configurações basicas para VMs (configuração do netplan, openvpn3, ssh para as VMs remotas): <a href="" >link para as configurações padrão<a/>
   
 ```bash
-  sudo apt update
+$ sudo apt update
 ```
 ```bash
-  sudo apt install samba
-```
- 
-```bash
-  whereis samba
-```
-```bash
-  sudo systemctl status smbd.service
+$ sudo apt install samba
 ```
  
 ```bash
-  netstat -an | grep LISTEN
+$ whereis samba
+```
+```bash
+$ sudo systemctl status smbd.service
 ```
  
 ```bash
-  sudo nano /etc/samba/smb.conf
+ $ netstat -an | grep LISTEN
+```
+ 
+```bash
+$ sudo nano /etc/samba/smb.conf
 ```
  Adicionando ao arquivo de configuração ```/etc/smb.conf```, em ```interfaces``` de global, os nomes dos adaptadores de rede, que no nosso caso será ```ens160 ens192``` 
  E Adicionando no final do arquivo as seguintes linhas: 
@@ -47,21 +47,64 @@
    force directory mode = 0777
 ```
  Para então reestartar o serviço samba com:
- ```bash
-   sudo systemctl restart smbd
- ```
+```bash
+$ sudo systemctl restart smbd
+```
  
  Para acessar os arquivos do servidor samba será necessário que um usuário do servidor samba esteja cadastrado no samba e esteja também cadastrado no grupo o qual o servidor samba é especificado em ```valid user = sambashare```, isso é feito da seguinte forma:
  
- ```bash 
-   sudo smbpasswd -a aluno
- ```
- em que ```aluno``` é um usuário do servidor ubuntu-server que hospeda o ```samba```
+```bash 
+$ sudo smbpasswd -a aluno
+```
+   em que ```aluno``` é um usuário do servidor ubuntu-server que hospeda o ```samba```
+
+```
+$ sudo usermod -aG sambashare aluno
+```
+   - adiciona o ```aluno``` no grupo ```sambashare``` (o grupo especificado em ```valid users = sambashare```)
  
+é preciso que a pasta a ser compartilhada no samba esteja com as permissões configuradas para acesso remoto:
+ 
+```bash
+$ sudo chown -R nobody:nogroup /samba/public
+$ sudo chmod -R 0775 /samba/public
+$ sudo chgrp sambashare /samba/public
+```
+   - exemplo de configuração de permissão para uma pasta ´´´/samba/public```
+ 
+```bash
+$ sudo systemctl enable smbd.service
+```
+
+```bash
+$ sudo systemctl status service
+```
+ 
+ *pronto, agora está funcionando
+ 
+ - agora pelo explorador de arquivos, digite na barra do path o ip do host da VM que hospeda o servidor samba na porta 445 ou 139
+```
+smb://10.9.13.105:445
+```
+ 
+se tudo der certo, aparecerá os arquivos no gerenciador de tarefas
+
+
+
+*Obs: se o gateway estiver implementado na rede local, será necessário conectar o gateway na VM do servidor samba pelo 
  ```
-   sudo usermod -aG sambashare aluno
+ $ telnet 10.9.13.105 445
  ```
- adiciona o ```aluno``` no grupo ```sambashare``` (o grupo especificado em ```valid users = sambashare```)
+ depois escrever o ip do gateway na porta 445
+ 
+```
+smb://10.9.13.109:445
+``` 
+ 
+ 
+
+ 
+ 
  
  
  
