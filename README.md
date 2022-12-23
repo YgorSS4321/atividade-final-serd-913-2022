@@ -2,9 +2,9 @@
 
 verificar depois:
 [smb](
-  https://github.com/alaelson/labredes2021/blob/main/network/samba/readme.md
+  https://github.com/YgorSS4321/atividade-final-serd-913-2022/blob/main/samba.md
 )
 
 [gw](
-  https://github.com/alaelson/labredes2021/blob/main/network/nat/readme.md
+  https://github.com/YgorSS4321/atividade-final-serd-913-2022/blob/main/gateway
 )
