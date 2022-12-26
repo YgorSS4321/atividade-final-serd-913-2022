@@ -1,13 +1,13 @@
 # gateway in Ubuntu-server
 
-  *configurações basicas para VMs (configuração do netplan, openvpn3, ssh para as VMs remotas): <a href="" >link para as configurações padrão<a/>
+  * configurações basicas para VMs (configuração do netplan, openvpn3, ssh para as VMs remotas): <a href="" >link para as configurações padrão<a/>
   
 ```bash
 $ sudo apt update
 ```
-*configurar ufw
+* configurar ufw
  
-*Configurar as interfaces de rede (netplan)
+* Configurar as interfaces de rede (netplan)
 ```
 $ sudo nano /etc/netplan/50-cloud-init.yaml 
 ```
@@ -31,8 +31,15 @@ $ sudo netplan apply
 $ ifconfig -a
 ```
 
-*configurar ```/etc/rc.local```
-
+* configurar ```/etc/rc.local```
+ primeiro é preciso mudar as permissões do arquivo (e cria-lo caso ele ainda não tenha sido)
+  ```sudo chmod 775 /etc/rc.local```
+ então editar o arquivo:
+  ```sudo nano /etc/rc.local```
+ e substituindo 
+  ```ens160``` pelo nome da interface da rede ```WAN``` e
+  ```ens192``` pelo nome da interface da rede ```LAN```,
+ colar os seguintes comandos:
 ```
 #!/bin/bash
 
@@ -66,8 +73,6 @@ iptables -A FORWARD -i ens192 -o ens160 -m conntrack \
 # Trafego NAT sai pela interface WAN
 iptables -t nat -A POSTROUTING -o ens192 -j MASQUERADE
 
-
-
 #Recebe pacotes na porta 445 da interface externa do gw e encaminha para o servidor interno na porta 445
 iptables -A PREROUTING -t nat -i ens160 -p tcp --dport 445 -j DNAT --to 10.9.13.105:445
 iptables -A FORWARD -p tcp -d 10.9.13.105 --dport 445 -j ACCEPT
@@ -86,9 +91,37 @@ iptables -A FORWARD -p udp -d 10.9.13.127 --dport 53 -j ACCEPT
 exit 0
 ```
 
-*reconfigurar ufw (...)
+* reconfigurar firewall ufw 
+ para isso, rodar os seguintes comandos (em ordem):
+ ```sudo apt install ufw```
+ ```sudo ufw allow ssh```
+ ```sudo ufw enable```
+ ```sudo ufw status``` ou ```sudo systemctl status ufw.service```
+ 
+ caso apareça no último comando "active (running)", o ufw está ativo
+ 
+ 
 
-*configurar outras máquinas para acessarem o gateway
+* configurar outras máquinas para acessarem o gateway
+  nesse caso é alterando no arquivo ```/etc/netplan/00-installer-config.yaml```, a informação ```gateway4``` da interface de rede ```ens192``` (LAN)
+  
+  mais ou menos assim: 
+  ```
+   network:
+      ethernets:
+          ens160:
+              dhcp4: false
+              addresses: [10.0.0.1/24]
+              
+              
+          ens192:
+              gateway4: 192.168.13.25
+              addresses: [192.168.13.26/28]
+              dhcp4: false              
+      version: 2
+ 
+  ```
+  depois de feitas as configurações, elas precisam ser submetidas com o comando ```sudo netplan apply```
 
 
 
