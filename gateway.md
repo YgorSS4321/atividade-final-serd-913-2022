@@ -92,7 +92,7 @@ exit 0
 ```
 
 * reconfigurar firewall ufw 
- para isso, rodar os seguintes comandos (em ordem):
+para isso, rodar os seguintes comandos (em ordem):
  ```sudo apt install ufw```
  ```sudo ufw allow ssh```
  ```sudo ufw enable```
@@ -111,7 +111,7 @@ exit 0
       ethernets:
           ens160:
               dhcp4: false
-              addresses: [10.0.0.1/24]
+              addresses: [10.9.13.105/24]
               
               
           ens192:
