@@ -13,14 +13,21 @@ $ sudo nano /etc/netplan/00-installer-config.yaml
 ```
 
 ```
+# This is the network config written by 'subiquity'
+# nesse caso está considerando ens160 como interface LAN e a ens192 como WAN
 network:
-    ethernets:
-        enp0s3:
-            dhcp4: true
-        enp0s8:
-            addresses: [10.0.0.1/24]
-            dhcp4: false              
-    version: 2
+  renderer: networkd
+  ethernets:
+    ens160:
+      dhcp4: true
+      addresses: [10.9.13.109/24]
+      gateway4: 10.9.13.1 
+
+    ens192:
+      dhcp4: false
+      addresses: [192.168.13.25/28]
+  version: 2
+
 ```
 
 ```
