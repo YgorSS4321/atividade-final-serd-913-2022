@@ -325,8 +325,103 @@ dig -x 10.9.13.134
 
 ```
 
+# DNS Slave
+
+### instalação do bind9
+```
+sudo apt-get install bind9 dnsutils bind9-doc -y
+```
+
+### verificar status bind9
+
+```
+sudo systemctl status bind9.service
+```
+
+### configuração das zonas
+
+```
+sudo nano /etc/bind/named.conf.local
+```
+
+```
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "grupo2.turma913.ifalara.local" {
+  type slave;
+  file "/etc/bind/zones/db.grupo2.turma913.ifalara.local";
+  masters { 10.9.13.127; };
+};
+
+zone "13.9.10.in-addr.arpa" IN {
+  type slave;
+  file "/etc/bind/zones/db.10.9.13.rev";
+  masters { 10.9.13.127; };
+};
+```
 
 
+### teste dig:
+
+```
+dig smb.grupo2.turma913.ifalara.local
+```
+
+```
+; <<>> DiG 9.16.1-Ubuntu <<>> smb.grupo2.turma913.ifalara.local
+;; global options: +cmd
+;; Got answer:
+;; WARNING: .local is reserved for Multicast DNS
+;; You are currently testing what happens when an mDNS query is leaked to DNS
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 46112
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;smb.grupo2.turma913.ifalara.local. IN	A
+
+;; ANSWER SECTION:
+smb.grupo2.turma913.ifalara.local. 10800 IN A	10.9.13.105
+
+;; Query time: 4 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Thu Dec 29 13:05:55 UTC 2022
+;; MSG SIZE  rcvd: 78
+
+```
+
+```
+dig -x 10.9.13.109
+```
+
+```
+; <<>> DiG 9.16.1-Ubuntu <<>> -x 10.9.13.109
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 27333
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;109.13.9.10.in-addr.arpa.	IN	PTR
+
+;; ANSWER SECTION:
+109.13.9.10.in-addr.arpa. 604800 IN	PTR	gw.grupo2.turma913.ifalara.local.
+
+;; Query time: 4 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Thu Dec 29 13:06:11 UTC 2022
+;; MSG SIZE  rcvd: 99
+
+```
 
  [voltar para o README.md](https://github.com/YgorSS4321/atividade-final-serd-913-2022/blob/main/README.md)
 
