@@ -84,21 +84,21 @@ $ sudo systemctl status service
  
  - agora pelo explorador de arquivos, digite na barra do path o ip do host da VM que hospeda o servidor samba na porta 445 ou 139
 ```
-smb://10.9.13.105:445
+smb://10.9.13.105
 ```
  
 se tudo der certo, aparecerá os arquivos no gerenciador de tarefas
 
 
 
-*Obs: se o gateway estiver implementado na rede local, será necessário conectar o gateway na VM do servidor samba pelo 
+*Obs: se o gateway estiver implementado na rede local, será necessário verificar o gateway na VM do servidor samba pelo 
  ```
  $ telnet 10.9.13.105 445
  ```
  depois escrever o ip do gateway na porta 445
  
 ```
-smb://10.9.13.109:445
+smb://10.9.13.109
 ``` 
  
  
