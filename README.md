@@ -7,9 +7,9 @@ verificar depois:
 )
 
 * [gw](
-  https://github.com/YgorSS4321/atividade-final-serd-913-2022/blob/main/gateway
+  https://github.com/YgorSS4321/atividade-final-serd-913-2022/blob/main/gateway.md
 )
 
 * [dns](
-  https://github.com/YgorSS4321/atividade-final-serd-913-2022/blob/main/dns
+  https://github.com/YgorSS4321/atividade-final-serd-913-2022/blob/main/dns.md
 ) 
