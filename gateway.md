@@ -19,7 +19,7 @@ network:
   renderer: networkd
   ethernets:
     ens160:
-      dhcp4: true
+      dhcp4: false
       addresses: [10.9.13.109/24]
       gateway4: 10.9.13.1 
 
