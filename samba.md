@@ -12,17 +12,27 @@ $ sudo apt install samba
 ```bash
 $ whereis samba
 ```
+ 
+ <img src="/prints_de_tela/samba/Captura de tela de 2022-12-23 07-46-29.png" width=1000/>
+ 
 ```bash
 $ sudo systemctl status smbd.service
 ```
+ 
+  <img src="/prints_de_tela/samba/Captura de tela de 2022-12-23 07-47-04.png" width=1000/>
  
 ```bash
  $ netstat -an | grep LISTEN
 ```
  
+<img src="/prints_de_tela/samba/Captura de tela de 2022-12-23 07-58-05.png" width=1000/>
+ 
 ```bash
 $ sudo nano /etc/samba/smb.conf
 ```
+ 
+ <img src="/prints_de_tela/samba/Captura de tela de 2022-12-23 07-47-08.png" width=1000/>
+ 
  Adicionando ao arquivo de configuração ```/etc/smb.conf```, em ```interfaces``` de global, os nomes dos adaptadores de rede, que no nosso caso será ```ens160 ens192``` 
  E Adicionando no final do arquivo as seguintes linhas: 
  ```
