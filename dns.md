@@ -40,6 +40,9 @@ drwxr-xr-x 94 root root 4096 Oct  8 23:29 ..
 -rw-r--r--  1 root root 1317 Aug  7 14:43 zones.rfc1918
 ```
 ### Zonas
+
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-01-32.png" width=1000/>
+
 as zonas são encontradas na pasta **/etc/bind/zones**, em arquivos **db.**
 ```
 sudo mkdir /etc/bind/zones
@@ -147,6 +150,8 @@ $TTL	604800
 214	IN	PTR	bd.grupo2.turma913.ifalara.local.      ;10.9.13.214
 ```
 
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-10-32.png" width=1000/>
+
 ### configuração do arquivo named.conf
 * para ativar as zonas descritas, deve-se alterar o arquivo **/etc/bind/named.conf.local**
   
@@ -179,7 +184,6 @@ zone "13.9.10.in-addr.arpa" IN {
 sudo named-checkconf
 ```
 
-
 #### verificar sintaxe dos arquivos db.
 
 ```
@@ -209,6 +213,8 @@ OPTIONS="-4 -u bind"
 
 ## Configuração dos clientes
 
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-19-46.png" width=1000/>
+
 * adicionar no arquivo **/etc/netplan/00-installer-config.yaml**, na interface `ens192` os nameservers:
 ```
 nameservers:
@@ -218,6 +224,8 @@ nameservers:
          search: [grupo2.turma913.ifalara.local]
 
 ```
+
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-00-38.png" width=1000/>
 
 ## testando servidor DNS
 
@@ -239,6 +247,9 @@ MulticastDNS setting: no
                       10.9.13.134                  
           DNS Domain: grupo2.turma913.ifalara.local
 ```
+
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-20-43.png" width=1000/>
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-21-47.png" width=1000/>
 
 ## testando o DNS para o ns1
 
@@ -269,6 +280,8 @@ ns1.grupo2.turma913.ifalara.local. 6714	IN A	10.9.13.127
 ;; MSG SIZE  rcvd: 78
 ```
 
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-04-07.png" width=1000/>
+
 ### testando o DNS Reverso para a máquina ns1
 
 ```
@@ -297,6 +310,10 @@ dig -x 10.9.13.127
 
 ```
 
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-07-50.png" width=1000/>
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-00-38.png" width=1000/>
+
+
 ### DNS reverso para o ns2
 
 ```
@@ -324,6 +341,9 @@ dig -x 10.9.13.134
 ;; MSG SIZE  rcvd: 100
 
 ```
+
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-14-07.png" width=1000/>
+
 
 # DNS Slave
 
@@ -423,10 +443,16 @@ dig -x 10.9.13.109
 
 ```
 
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-12-55.png" width=1000/>
+
+
+
+* testes
+
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-25-04.png" width=1000/>
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-24-20.png" width=1000/>
+<img src="/prints_de_tela/dns/Captura de tela de 2022-12-29 09-22-22.png" width=1000/>
+
+
  [voltar para o README.md](https://github.com/YgorSS4321/atividade-final-serd-913-2022/blob/main/README.md)
-
-
-
-
-
 
