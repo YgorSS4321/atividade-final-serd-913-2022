@@ -31,8 +31,6 @@ $ sudo systemctl status smbd.service
 $ sudo nano /etc/samba/smb.conf
 ```
  
- <img src="/prints_de_tela/samba/Captura de tela de 2022-12-23 07-47-08.png" width=1000/>
- 
  Adicionando ao arquivo de configuração ```/etc/smb.conf```, em ```interfaces``` de global, os nomes dos adaptadores de rede, que no nosso caso será ```ens160 ens192``` 
  E Adicionando no final do arquivo as seguintes linhas: 
  ```
@@ -60,6 +58,9 @@ $ sudo nano /etc/samba/smb.conf
 ```bash
 $ sudo systemctl restart smbd
 ```
+
+<img src="/prints_de_tela/samba/Captura de tela de 2022-12-23 07-47-08.png" width=1000/>
+<img src="/prints_de_tela/samba/Captura de tela de 2022-12-23 07-47-13.png" width=1000/>
  
  Para acessar os arquivos do servidor samba será necessário que um usuário do servidor samba esteja cadastrado no samba e esteja também cadastrado no grupo o qual o servidor samba é especificado em ```valid user = sambashare```, isso é feito da seguinte forma:
  
@@ -111,6 +112,8 @@ se tudo der certo, aparecerá os arquivos no gerenciador de tarefas
 smb://10.9.13.109
 ``` 
  
+ <img src="/prints_de_tela/samba/Captura de tela em 2022-12-23 18-06-14.png" width=1000/>
+
  
  
  
