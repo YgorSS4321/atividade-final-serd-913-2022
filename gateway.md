@@ -7,6 +7,8 @@ $ sudo apt update
 ```
 * configurar ufw
  
+<img src="/prints_de_tela/gateway/Captura de tela de 2022-12-23 08-18-32.png" width=1000/>
+ 
 * Configurar as interfaces de rede (netplan)
 ```
 $ sudo nano /etc/netplan/00-installer-config.yaml 
@@ -47,11 +49,12 @@ $ ifconfig -a
   ```ens160``` pelo nome da interface da rede ```WAN``` e
   ```ens192``` pelo nome da interface da rede ```LAN```,
  colar os seguintes comandos:
-```
  
+<img src="/prints_de_tela/gateway/Captura de tela de 2022-12-23 08-18-52.png" width=1000/>
 <img src="/prints_de_tela/gateway/Captura de tela de 2022-12-23 08-18-57.png" width=1000/>
-<img src="/prints_de_tela/gateway/Captura de tela de 2022-12-23 08-19-00.png" width=1000/>
  
+ 
+``` 
 #!/bin/bash
 
 # /etc/rc.local
@@ -105,6 +108,8 @@ exit 0
 
 ```
 
+<img src="/prints_de_tela/gateway/Captura de tela de 2022-12-23 08-19-00.png" width=1000/>
+ 
 * reconfigurar firewall ufw 
 para isso, rodar os seguintes comandos (em ordem):
  ```sudo apt install ufw```
