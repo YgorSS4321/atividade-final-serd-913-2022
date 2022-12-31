@@ -117,7 +117,7 @@ smb://10.9.13.109
  <img src="/prints_de_tela/samba/Captura de tela em 2022-12-23 18-06-14.png" width=1000/>
 
  
- 
+ * nome de usuário e senha para testes: ``ygor``
  
  
  
