@@ -48,6 +48,10 @@ $ ifconfig -a
   ```ens192``` pelo nome da interface da rede ```LAN```,
  colar os seguintes comandos:
 ```
+ 
+<img src="/prints_de_tela/gateway/Captura de tela de 2022-12-23 08-18-57.png" width=1000/>
+<img src="/prints_de_tela/gateway/Captura de tela de 2022-12-23 08-19-00.png" width=1000/>
+ 
 #!/bin/bash
 
 # /etc/rc.local
