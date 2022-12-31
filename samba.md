@@ -112,13 +112,13 @@ se tudo der certo, aparecerá os arquivos no gerenciador de tarefas
 smb://10.9.13.109
 ``` 
  
+ 
+ 
  <img src="/prints_de_tela/samba/Captura de tela em 2022-12-23 18-06-14.png" width=1000/>
 
  
  
  
+ 
+ 
  [voltar para o README.md](https://github.com/YgorSS4321/atividade-final-serd-913-2022/blob/main/README.md)
-
- 
- 
- 
